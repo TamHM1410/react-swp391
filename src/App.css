@@ -3,3 +3,13 @@
 @tailwind utilities;
 @import 'daisyui';
 
+.progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 4px; /* hoặc điều chỉnh chiều cao theo nhu cầu */
+    background-color: #ff6781; /* hoặc bất kỳ màu nào bạn muốn */
+    transform-origin: 0 0;
+    width: 100%; /* Đảm bảo thanh cuộn chiếm toàn bộ chiều rộng */
+    z-index: 50;
+  }

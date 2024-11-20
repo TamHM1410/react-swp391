@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 
-const LoginView = () => {
+const AccountView = () => {
   const {
     register,
     handleSubmit,
@@ -13,12 +13,22 @@ const LoginView = () => {
   };
   return (
     <div className="w-full h-[100vh] flex items-center item justify-center">
-      <div className="card bg-base-100 w-96 shadow-xl">
+      <div className="card bg-base-100 w-[500px] shadow-xl">
         <figure>
-          <img src="https://i0.wp.com/cornpinkhouse.vn/wp-content/uploads/2024/06/414109747_740415034786507_876905826942496212_n-3.jpg?resize=1067%2C800&ssl=1" alt="Shoes" />
+          <img
+            src="https://vianimetwixtor.com/wp-content/uploads/2024/04/Killua.jpg"
+            alt="Shoes"
+          />
         </figure>
-        <div className="card-body p-10">
-          <h2 className="card-title py-2">Đăng nhập ngay</h2>
+        <div className="w-full flex justify-center relative bottom-16">
+          <div className="avatar">
+            <div className="w-36 rounded-full">
+              <img src="https://scontent.fsgn2-9.fna.fbcdn.net/v/t39.30808-6/464871103_2279771145721810_6509777599102787999_n.jpg?stp=cp6_dst-jpg&_nc_cat=106&ccb=1-7&_nc_sid=a5f93a&_nc_ohc=BvoLa97aEFMQ7kNvgGkWCuI&_nc_zt=23&_nc_ht=scontent.fsgn2-9.fna&_nc_gid=AzO5CWnGYGarTwhetFbVexk&oh=00_AYBzcOXDdFjlH-08FtE1MEQp4LcdlHWC3LVH81-oWZYRcw&oe=6743DA49" />
+            </div>
+          </div>
+        </div>
+        <div className="card-body pb-10 px-10">
+          <h2 className="card-title py-2">Chào Tâm </h2>
 
           <form className="w-full" onSubmit={handleSubmit(onSubmit)}>
             <div className="py-5 pb-8">
@@ -39,6 +49,7 @@ const LoginView = () => {
                     {...register("username", {
                       required: "Tên đăng nhập là bắt buộc.",
                     })}
+                    value={"tam"}
                   />
                 </div>
                 {errors.username && (
@@ -53,57 +64,49 @@ const LoginView = () => {
                 <div className="flex items-center gap-2">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 16 16"
+                    viewBox="0 0 24 24"
                     fill="currentColor"
                     className="h-4 w-4 opacity-70"
                   >
                     <path
                       fillRule="evenodd"
-                      d="M14 6a4 4 0 0 1-4.899 3.899l-1.955 1.955a.5.5 0 0 1-.353.146H5v1.5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-2.293a.5.5 0 0 1 .146-.353l3.955-3.955A4 4 0 1 1 14 6Zm-4-2a.75.75 0 0 0 0 1.5.5.5 0 0 1 .5.5.75.75 0 0 0 1.5 0 2 2 0 0 0-2-2Z"
+                      d="M12 2a2 2 0 0 1 2 2v2h6a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6V4a2 2 0 0 1 2-2zm-1 4V4a1 1 0 0 0-2 0v2h2zM4 8v12h16V8H4z"
                       clipRule="evenodd"
                     />
                   </svg>
+
                   <input
-                    type="password"
+                    type="text"
+                    value={"hunhminhtam@gmail.com"}
                     className="grow py-2"
-                    placeholder="Mật khẩu"
-                    {...register("password", {
-                      required: "Mật khẩu là bắt buộc.",
+                    placeholder="Email"
+                    {...register("email", {
+                      required: "Email  là bắt buộc.",
                       minLength: {
-                        value: 6,
+                        value: 8,
                         message: "Mật khẩu phải ít nhất 6 ký tự.",
                       },
                     })}
                   />
                 </div>
-                {errors.password && (
+                {errors.email && (
                   <span className="text-red-500 text-sm">
-                    {errors.password.message}
+                    {errors.email.message}
                   </span>
                 )}
               </label>
             </div>
 
             <div className="card-actions w-full pt-2">
-              <button type="submit" className="btn btn-primary w-full">
-                Đăng nhập
+              <button type="submit" className="btn btn-primary w-full" disabled>
+                Chỉnh sửa
               </button>
             </div>
           </form>
-
-          <div className="w-full flex  justify-center">Hoặc</div>
-          <div className=" flex flex-col justify-center w-full">
-            <div className="w-full flex justify-center">
-              Chưa có tài khoản ?
-            </div>
-            <div className="w-full flex justify-center font-bold cursor-pointer">
-              <Link to="/auth/register">Đăng ký ngay</Link>
-            </div>
-          </div>
         </div>
       </div>
     </div>
   );
 };
 
-export default LoginView;
+export default AccountView;

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 const Header = () => {
   return (
     <div className="navbar bg-base-100">
@@ -24,49 +25,33 @@ const Header = () => {
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
           >
             <li>
-              <a>Item 1</a>
-            </li>
-            <li>
-              <a>Parent</a>
-              <ul className="p-2">
-                <li>
-                  <a>Submenu 1</a>
-                </li>
-                <li>
-                  <a>Submenu 2</a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a>Item 3</a>
-            </li>
+            <Link to='/'>Trang chủ</Link>
+          </li>
+         
+          <li>
+            <Link to='/products'>Sản phẩm</Link>
+          </li>
+          <li>
+            <Link to='/contact'>Liên hệ</Link> 
+          </li>
+          <li>
+            <a>Câu hỏi thường gặp</a>
+          </li>
           </ul>
         </div>
-        <a className="btn btn-ghost text-xl">App</a>
+        <div className="btn btn-ghost text-xl">Hosite</div>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
           <li>
-            <a>Trang chủ</a>
+            <Link to='/'>Trang chủ</Link>
           </li>
-          {/* <li>
-            <details>
-              <summary>Parent</summary>
-              <ul className="p-2">
-                <li>
-                  <a>Submenu 1</a>
-                </li>
-                <li>
-                  <a>Submenu 2</a>
-                </li>
-              </ul>
-            </details>
-          </li> */}
+         
           <li>
-            <a>Sản phẩm</a>
+            <Link to='/products'>Sản phẩm</Link>
           </li>
           <li>
-            <a>Liên hệ</a> 
+            <Link to='/contact'>Liên hệ</Link> 
           </li>
           <li>
             <a>Câu hỏi thường gặp</a>
@@ -74,7 +59,7 @@ const Header = () => {
         </ul>
       </div>
       <div className="navbar-end">
-        <a className="btn">Đăng nhập</a>
+        <Link to='/auth/login' className="btn">Đăng nhập</Link>
       </div>
     </div>
   );
