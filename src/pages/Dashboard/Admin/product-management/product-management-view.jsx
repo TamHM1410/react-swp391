@@ -6,17 +6,17 @@ import ProductTable from "./product-table";
 const ProductManageMentview = () => {
   return (
     <>
-      <DashBoardLayout>
+    <DashBoardLayout>
         <div>
           <BreadcrumbProduct />
-         
-          <AddNewProdcuct />
+
+          {/* <AddNewProdcuct /> */}
 
           <ProductTable />
         </div>
-      </DashBoardLayout>
+    </DashBoardLayout>
     </>
   );
 };
-
+    
 export default ProductManageMentview;

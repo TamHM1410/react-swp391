@@ -14,8 +14,8 @@ const RegisterView = () => {
   return (
     <div className="w-full h-[100vh] flex items-center item justify-center">
       <div className="card bg-base-100 w-96 shadow-xl">
-        <figure>
-          <img src="https://i0.wp.com/cornpinkhouse.vn/wp-content/uploads/2024/06/414109747_740415034786507_876905826942496212_n-3.jpg?resize=1067%2C800&ssl=1" alt="Shoes" />
+        <figure className="h-[20vh]">
+          <img src="https://ohstem.vn/wp-content/uploads/2024/09/robot-ORC-K2-tai-OhStem-5.jpg" alt="Shoes" />
         </figure>
         <div className="card-body p-10">
           <h2 className="card-title py-2">Đăng ký mới</h2>

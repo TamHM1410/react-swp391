@@ -19,6 +19,7 @@ const Modal = ({
         {type === "edit" && <Pencil size={25} />}
       </button>
       <dialog id={modalId} className="modal">
+        
         <div className="modal-box w-11/12 max-w-5xl">
           <h3 className="font-bold text-lg">{name}</h3>
           <div>

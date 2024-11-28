@@ -1,4 +1,7 @@
-const CheckoutSummary = () => {
+import { useNavigate } from "react-router-dom";
+const CheckoutSummary = ({step}) => {
+  let navigate = useNavigate();
+
   return (
     <>
       <div className="card bg-base-100 w-96 shadow-xl ">
@@ -18,7 +21,9 @@ const CheckoutSummary = () => {
           </div>
         </div>
         <div className="w-full">
-        <button className="btn btn-neutral w-full mt-10 ">Thanh toán</button>
+        <button className="btn btn-neutral w-full mt-10 " onClick={()=>{
+          if(step==='0')  navigate("/checkout?step=1")
+        }}>{step==='0'?'Tiếp tục':'Thanh toán'}</button>
       </div>
       </div>
    

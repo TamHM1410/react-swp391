@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 
 function InternalPage() {
-  const text = "404 - Trang không tìm thấy".split(" ");
+  const text = "404 - Page not found".split(" ");
 
   return (
     <div className="w-full h-[100vh] flex items-center justify-center flex-col">
@@ -21,7 +21,7 @@ function InternalPage() {
           </motion.span>
         ))}
       </div>
-      <p>Rất tiếc, trang bạn tìm không tồn tại.</p>
+      <p>Sorry, the page you are looking for does not exist.</p>
     </div>
   );
 }

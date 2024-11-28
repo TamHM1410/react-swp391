@@ -14,6 +14,8 @@ import HomeView from "./pages/home/home-view";
 import Dashboard from "./pages/Dashboard/Dashboard";
 
 import ProductManageMentview from "./pages/Dashboard/Admin/product-management/product-management-view";
+import ProductDetail from "./pages/Dashboard/Admin/product-management/[id]/ProductDetail";
+import AddNewProduct from "./pages/Dashboard/Admin/product-management/AddNewProduct";
 import { paths } from "./config/endPoint";
 function App() {
   return (
@@ -31,6 +33,10 @@ function App() {
           <Route path={paths.dashboard.account} element={<AccountView/>} />
           <Route path={paths.dashboard.root} element={<Dashboard/>} />
           <Route path={paths.dashboard.product} element={<ProductManageMentview/>} />
+          <Route path={paths.dashboard.product_detail} element={<ProductDetail/>} />
+          <Route path={paths.dashboard.addnew_product} element={<AddNewProduct/>} />
+
+
 
 
 

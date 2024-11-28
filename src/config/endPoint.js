@@ -7,7 +7,9 @@ export const paths = {
     account: "/dashboard/account",
     product: "/dashboard/product",
     user:'/dashboard/user',
-    courses:'/dashboard/courses'
+    courses:'/dashboard/courses',
+    product_detail:'/dashboard/product/:id',
+    addnew_product:'/dashboard/product/addnew'
 
   },
   product: {
