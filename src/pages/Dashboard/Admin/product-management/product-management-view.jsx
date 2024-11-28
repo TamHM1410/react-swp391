@@ -1,22 +1,22 @@
 import DashBoardLayout from "../../../../layouts/DashboardLayout";
 import BreadcrumbProduct from "./breadcumb";
 import AddNewProdcuct from "./AddNewProduct";
+import ProductTable from "./product-table";
 
-
-const ProductManageMentview=()=>{
-    return  (<>
-    <DashBoardLayout>
+const ProductManageMentview = () => {
+  return (
+    <>
+      <DashBoardLayout>
         <div>
-            <BreadcrumbProduct/>
-            Product Management 
-            <AddNewProdcuct/>
+          <BreadcrumbProduct />
+         
+          <AddNewProdcuct />
 
-
+          <ProductTable />
         </div>
+      </DashBoardLayout>
+    </>
+  );
+};
 
-    </DashBoardLayout>
-    
-    </>)
-}
-
-export default ProductManageMentview
+export default ProductManageMentview;

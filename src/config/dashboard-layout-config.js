@@ -1,4 +1,4 @@
-import { Target, ChartNoAxesCombined, PackageSearch, Users } from "lucide-react";
+import { Target, ChartNoAxesCombined, PackageSearch, Users,CalendarCheck,MessageSquare,UserCog } from "lucide-react";
 import { paths } from "./endPoint";
 
 const dashboardLayoutConfig = [
@@ -30,6 +30,27 @@ const dashboardLayoutConfig = [
         name: "Products",
         path: paths.dashboard.product,
         icon: PackageSearch, // Trả về component React
+      },
+      {
+        name: "Courses",
+        path: paths.dashboard.courses,
+        icon: CalendarCheck, // Trả về component React
+      },
+    ],
+    icon: "/",
+  },
+  {
+    tittle: "Other",
+    subheader: [
+      {
+        name: "Account",
+        path: paths.dashboard.account,
+        icon: UserCog , // Trả về component React
+      },   
+      {
+        name: "Chat",
+        path: paths.dashboard.courses,
+        icon: MessageSquare , // Trả về component React
       },
     ],
     icon: "/",

@@ -6,7 +6,8 @@ export const paths = {
     analytic: "/dashboard/analytic",
     account: "/dashboard/account",
     product: "/dashboard/product",
-    user:'/dashboard/user'
+    user:'/dashboard/user',
+    courses:'/dashboard/courses'
 
   },
   product: {
