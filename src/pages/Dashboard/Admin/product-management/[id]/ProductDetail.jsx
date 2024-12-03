@@ -4,30 +4,33 @@ import ProductDetailContent from "./ProductDetail-content";
 
 import ProductViewDetail from "./Product-view";
 import { useSearchParams } from "react-router-dom";
+import useStoreProducts from "../../../../../stores/products-store";
+import { useQuery } from "@tanstack/react-query";
+import { Pencil ,Cog} from "lucide-react";
+import { useState } from "react";
 
-const title = ["Dashboard", "Product", "Details"];
+const title = ["Dashboard", "Quản lý", "Sản phẩm", "Chi tiết"];
 const ProductDetail = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const action = searchParams.get("action");
+  const [isEdit, setEdit] = useState(false);
+
+  const { currentProduct, selectedId } = useStoreProducts();
 
   return (
     <>
       <DashBoardLayout>
-        {action === "edit" && (
-          <>
-            <div className="py-2 text-[28px]">Edit</div>
+        {/* <>
+            <div className="py-2 text-[28px]"></div>
             <Breadcrum title={title} />
-            <ProductDetailContent />
-          </>
-        )}
+          </> */}
 
-        {action === "view" && (
-          <>
-            <div className="py-2 text-[28px]">View</div>
-            <Breadcrum title={title} />
-            <ProductViewDetail />
-          </>
-        )}
+        <>
+          <div className="py-2 text-[28px]">Sản phẩm</div>
+          <Breadcrum title={title} />
+          <div><button className="btn " type="button" onClick={()=>setEdit(!isEdit)}><Cog /></button></div>
+          {isEdit ? <ProductDetailContent /> : <ProductViewDetail />}
+        </>
       </DashBoardLayout>
     </>
   );

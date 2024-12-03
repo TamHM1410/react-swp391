@@ -1,17 +1,12 @@
 import Table from "../../../../components/Table";
-const title=["Id","Name","Price","Description","Status"]
+const title=["Id","Tên","Mô tả"," Kho","Giá","Hình ảnh"]
+import { paths } from "../../../../config/endPoint";
 
-const ProductTable = () => {
-  const data=[{
-    id:1,
-    name:'Kit stem',
-    price:20000,
-    description:'Kit stem cho tre em',
-    status:'Success'
-  }]
+const ProductTable = ({data=[]}) => {
+  
   return (
     <div className="px-5 py-5 w-full h-full">
-      <Table  title={title} data={data}/>
+      <Table  title={title} data={data} />
     </div>
   );
 };

@@ -5,7 +5,7 @@ const DashBoardLayout = ({ children }) => {
 
   return (
     <>
-      <div className="w-full h-[100vh] flex gap-2 font-semibold	">
+      <div className="w-full min-h-[100vh] flex gap-2 font-semibold	">
         <div className="w-1/5">
           <div className="drawer lg:drawer-open">
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />

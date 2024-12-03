@@ -1,16 +1,39 @@
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import { registerApi } from "../../apis/access";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+
 
 const RegisterView = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
+  const navigate=useNavigate()
 
-  const onSubmit = (data) => {
-    console.log("Form Data:", data);
+  const onSubmit = async(data) => {
+  try{   console.log("Form Data:", data);
+   const res= await registerApi(data)
+   toast.success(res.message)
+   reset()
+   navigate('/auth/login')
+
+
+  }catch(error){toast.error(error.message)}
   };
+
+  useEffect(() => {
+    // Kiểm tra nếu người dùng đã đăng nhập
+    const user = localStorage.getItem("user");
+    if (user) {
+      // Nếu đã đăng nhập, điều hướng đến trang dashboard
+      navigate("/dashboard");
+    }
+  }, [navigate]);
   return (
     <div className="w-full h-[100vh] flex items-center item justify-center">
       <div className="card bg-base-100 w-96 shadow-xl">
@@ -21,6 +44,34 @@ const RegisterView = () => {
           <h2 className="card-title py-2">Đăng ký mới</h2>
 
           <form className="w-full" onSubmit={handleSubmit(onSubmit)}>
+
+          <div className="py-2">
+              <label className="input input-bordered flex flex-col gap-2">
+                <div className="flex items-center gap-2">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 16 16"
+                    fill="currentColor"
+                    className="h-4 w-4 opacity-70"
+                  >
+                    <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM12.735 14c.618 0 1.093-.561.872-1.139a6.002 6.002 0 0 0-11.215 0c-.22.578.254 1.139.872 1.139h9.47Z" />
+                  </svg>
+                  <input
+                    type="text"
+                    className="grow py-2"
+                    placeholder="Họ tên"
+                    {...register("name", {
+                      required: "Họ tên là bắt buộc.",
+                    })}
+                  />
+                </div>
+                {errors.name && (
+                  <span className="text-red-500 text-sm">
+                    {errors.name.message}
+                  </span>
+                )}
+              </label>
+            </div>
             <div className="py-5 ">
               <label className="input input-bordered flex flex-col gap-2">
                 <div className="flex items-center gap-2">
@@ -157,7 +208,7 @@ const RegisterView = () => {
           <div className=" flex flex-col justify-center w-full">
             <div className="w-full flex justify-center">Đã có tài khoản ?</div>
             <div className="w-full flex justify-center font-bold cursor-pointer">
-              <Link to="/auth/login">Đăng ký ngay</Link>
+              <Link to="/auth/login">Đăng nhập</Link>
             </div>
           </div>
         </div>

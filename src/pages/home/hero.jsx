@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 // Hero component
 const Hero = () => {
-  const text = "Phụ nữ Đến ngủ cũng phải đẹp".split(" ");
+  const text = "Khơi nguồn sáng tạo".split(" ");
 
   return (
     <div className="flex flex-col px-10 w-full h-[50vh] justify-center pt-14">
@@ -28,7 +28,7 @@ const Hero = () => {
       </div>
       <div className=" w-full h-full flex">
         <div className="w-1/2 h-full flex justify-center" >
-            <img src="https://i0.wp.com/cornpinkhouse.vn/wp-content/uploads/2023/07/Aurora-Ban-sao-cua-Thiet-ke-khong-ten-4.jpg?fit=1200%2C1200&ssl=1" style={{height:400}}/>
+            <img src="https://ohstem.vn/wp-content/uploads/2024/01/chuong-trinh-khuyen-mai-san-pham-ohstem-1024x503.png" style={{height:400}}/>
         </div>
         <div className="w-1/2 h-full flex items-center justify-center flex-col " style={{backgroundColor:'rgb(255 238 221)'}}>
          <div>𝗦𝗜Ê𝗨 𝗦𝗔𝗟𝗘</div>

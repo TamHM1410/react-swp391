@@ -3,7 +3,7 @@ import { useState } from "react";
 ///@child component
 import ActionDropDownLeft from "./Action-dropdown-left";
 
-const Table = ({ title = [], data = [] }) => {
+const Table = ({ title = [], data = [],paths='/' }) => {
   const [totalPage, setTotalPage] = useState(Math.ceil(data.length / 10));
   const [currentPage, setCurrentPage] = useState(0);
 
@@ -38,11 +38,21 @@ const Table = ({ title = [], data = [] }) => {
                 .slice(currentPage * 10, currentPage * 10 + 10)
                 .map((item, index) => (
                   <tr key={index}>
-                    {Object.entries(item).map(([key, value]) => (
-                      <td key={key}>{value}</td>
-                    ))}
+                    <td>{index+1}</td>
+                    {Object.entries(item)
+                      .filter(([key]) => key !== "_id"&& key!=="stem_slug") // Loại bỏ cột 'id'
+                      .map(([key, value]) => {
+                        if(key==="thumb_image"){
+                          return <td> <img src={value} alt="" className="w-[40px] h-[40px]"/></td>
+                        }
+                        if(key === "status" &&value ==='0')   return <td>Chua </td>
+
+                       return  <td key={key}>{value}</td> 
+
+                      })}
                     <td>
-                      <ActionDropDownLeft />
+
+                      <ActionDropDownLeft item={item} paths={paths}/>
                     </td>
                   </tr>
                 ))}

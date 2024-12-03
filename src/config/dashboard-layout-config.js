@@ -3,15 +3,15 @@ import { paths } from "./endPoint";
 
 const dashboardLayoutConfig = [
   {
-    tittle: "APP",
+    tittle: "Ứng dụng",
     subheader: [
       {
-        name: "Overview",
-        path: paths.dashboard.overview,
+        name: "Tổng quan",
+        path: '/dashboard/overview',
         icon: Target, // Trả về component React
       },
       {
-        name: "Analytics",
+        name: "Phân tích",
         path: paths.dashboard.analytic,
         icon: ChartNoAxesCombined, // Trả về component React
       },
@@ -19,20 +19,20 @@ const dashboardLayoutConfig = [
     icon: "/",
   },
   {
-    tittle: "MANAGEMENT",
+    tittle: " QUẢN LÝ",
     subheader: [
       {
-        name: "Users",
+        name: "Người dùng",
         path: paths.dashboard.user,
         icon: Users, // Trả về component React
       },
       {
-        name: "Products",
-        path: paths.dashboard.product,
+        name: "Sản phẩm",
+        path: '/dashboard/product',
         icon: PackageSearch, // Trả về component React
       },
       {
-        name: "Courses",
+        name: "Khóa học",
         path: paths.dashboard.courses,
         icon: CalendarCheck, // Trả về component React
       },
@@ -40,10 +40,10 @@ const dashboardLayoutConfig = [
     icon: "/",
   },
   {
-    tittle: "Other",
+    tittle: "Khác",
     subheader: [
       {
-        name: "Account",
+        name: "Tài khoản",
         path: paths.dashboard.account,
         icon: UserCog , // Trả về component React
       },   

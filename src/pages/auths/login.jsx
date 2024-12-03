@@ -1,21 +1,54 @@
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import { loginApi } from "../../apis/access";
+import toast from "react-hot-toast";
+import { useEffect } from "react";
+
+
+import { useNavigate } from "react-router-dom";
+
 
 const LoginView = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log("Form Data:", data);
+  const navigate = useNavigate();
+
+
+  const onSubmit = async (data) => {
+    try {
+      const res = await loginApi(data);
+      console.log(res, "res");
+      toast.success(res.message);
+      localStorage.setItem("token", res.data?.token);
+      localStorage.setItem("user", JSON.stringify(res.data?.payload.user));
+      reset();
+      navigate('/')
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
+
+  useEffect(() => {
+    // Kiểm tra nếu người dùng đã đăng nhập
+    const user = localStorage.getItem("user");
+    if (user) {
+      // Nếu đã đăng nhập, điều hướng đến trang dashboard
+      navigate("/");
+    }
+  }, [navigate]);
   return (
     <div className="w-full h-[100vh] flex items-center item justify-center">
       <div className="card bg-base-100 w-96 shadow-xl">
         <figure className="h-[30vh]">
-          <img src="https://ohstem.vn/wp-content/uploads/2024/09/robot-ORC-K2-tai-OhStem-5.jpg" alt="Shoes" />
+          <img
+            src="https://ohstem.vn/wp-content/uploads/2024/09/robot-ORC-K2-tai-OhStem-5.jpg"
+            alt="Shoes"
+          />
         </figure>
         <div className="card-body p-10">
           <h2 className="card-title py-2">Đăng nhập ngay</h2>

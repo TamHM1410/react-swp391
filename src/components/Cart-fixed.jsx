@@ -1,31 +1,43 @@
 import { ShoppingCart } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { get_carts } from "../apis/cart";
+import useCart from "../stores/cart-store";
 
 const CartTable = () => {
+  const { cart, updateCart } = useCart();
+
   return (
     <div className="">
       <table className="table">
         {/* head */}
         <thead>
           <tr>
+            <th></th>
             <th>Sản phẩm</th>
-            <th>Só lượng</th>
             <th>Thành tiền</th>
           </tr>
         </thead>
         <tbody>
           {/* row 1 */}
-          <tr>
-            <td>Bikini Brazil</td>
-            <td>1</td>
-            <td>4000</td>
-          </tr>
+          {cart &&
+            Array.isArray(cart.cart_product) &&
+            cart.cart_product.length > 0 &&
+            cart.cart_product.map((item) => {
+              return (
+                <>
+                  {" "}
+                  <tr>
+                    <td>
+                      <img src={item?.thumb_image} />
+                    </td>
+                    <td>{item.stem_name}</td>
+                    <td>{item.stem_price}</td>
+                  </tr>
+                </>
+              );
+            })}
 
-          <tr>
-            <th>Long Bào</th>
-            <td>1</td>
-            <td>4000</td>
-          </tr>
           {/* row 3 */}
         </tbody>
       </table>
@@ -34,6 +46,17 @@ const CartTable = () => {
 };
 
 const CartFixed = () => {
+  const { cart, updateCart } = useCart();
+  const { data, isLoading } = useQuery({
+    queryKey: ["carts"],
+    queryFn: async () => {
+      const res = await get_carts();
+      updateCart(res.data);
+
+      return res;
+    },
+  });
+  console.log(cart, "cart");
   const toggleDrawer = () => {
     const drawerToggle = document.getElementById("my-drawer");
     if (drawerToggle) {
@@ -50,7 +73,7 @@ const CartFixed = () => {
           <button className="btn glass relative" onClick={toggleDrawer}>
             <ShoppingCart width={40} height={40} />
             <span className="absolute bg-red-500 p-1 rounded-xl text-[8px] w-[18px] h-[18px] right-3 top-2 text-white">
-              0
+              {isLoading ? 0 : cart.cart_count_product}
             </span>
           </button>
         </div>
@@ -68,10 +91,19 @@ const CartFixed = () => {
 
             <div className="flex flex-col justify-items-end">
               <div className="flex  justify-between	">
-                Tổng tiền:<span>80000</span>
+                Tổng tiền:
+                <span>
+                  {cart &&
+                    cart.cart_product &&
+                    cart.cart_product.reduce((total, item) => {
+                      return total + item.stem_price * (item.quantity || 1); // Nếu có quantity thì nhân
+                    }, 0)}
+                </span>
               </div>
               <div className="flex flex-col justify-items-end text-end	pt-5">
-                <Link to='/checkout?step=0 ' className="btn btn-outline">Thanh toán</Link>
+                <Link to="/checkout?step=0 " className="btn btn-outline">
+                  Thanh toán
+                </Link>
               </div>
             </div>
           </ul>

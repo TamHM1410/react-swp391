@@ -18,7 +18,7 @@ const HomeView = () => {
       <Hero />
       <Connect/>
       {/* Thêm các nội dung khác như LoremIpsum */}
-      <HomeCarousel/>
+      {/* <HomeCarousel/> */}
       <Footer/>
     </>
   );
