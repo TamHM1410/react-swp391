@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { get_carts } from "../apis/cart";
 import useCart from "../stores/cart-store";
+import { useState } from "react";
 
 const CartTable = () => {
   const { cart, updateCart } = useCart();
@@ -13,8 +14,8 @@ const CartTable = () => {
         {/* head */}
         <thead>
           <tr>
-            <th></th>
             <th>Sản phẩm</th>
+            <th>Số lượng</th>
             <th>Thành tiền</th>
           </tr>
         </thead>
@@ -28,11 +29,10 @@ const CartTable = () => {
                 <>
                   {" "}
                   <tr>
-                    <td>
-                      <img src={item?.thumb_image} />
-                    </td>
-                    <td>{item.stem_name}</td>
-                    <td>{item.stem_price}</td>
+                    <td>{item.stem_id.stem_name}</td>
+                    <td>{item.quantity}</td>
+
+                    <td>{item.stem_id.stem_price * item.quantity}</td>
                   </tr>
                 </>
               );
@@ -46,17 +46,28 @@ const CartTable = () => {
 };
 
 const CartFixed = () => {
-  const { cart, updateCart } = useCart();
+  const { cart, updateCart, updateCartTotal } = useCart();
   const { data, isLoading } = useQuery({
     queryKey: ["carts"],
     queryFn: async () => {
       const res = await get_carts();
+      let flag = 0;
+
       updateCart(res.data);
+      if (
+        Array.isArray(res.data?.cart_product) &&
+        res.data.cart_product.length > 0
+      ) {
+        res.data?.cart_product.forEach((item) => {
+          flag += item.stem_id.stem_price * item.quantity;
+        });
+        updateCartTotal(flag);
+      }
+      return 0;
 
       return res;
     },
   });
-  console.log(cart, "cart");
   const toggleDrawer = () => {
     const drawerToggle = document.getElementById("my-drawer");
     if (drawerToggle) {
@@ -90,16 +101,6 @@ const CartFixed = () => {
             </li>
 
             <div className="flex flex-col justify-items-end">
-              <div className="flex  justify-between	">
-                Tổng tiền:
-                <span>
-                  {cart &&
-                    cart.cart_product &&
-                    cart.cart_product.reduce((total, item) => {
-                      return total + item.stem_price * (item.quantity || 1); // Nếu có quantity thì nhân
-                    }, 0)}
-                </span>
-              </div>
               <div className="flex flex-col justify-items-end text-end	pt-5">
                 <Link to="/checkout?step=0 " className="btn btn-outline">
                   Thanh toán

@@ -1,6 +1,10 @@
 import { Coins,Landmark } from "lucide-react"
 import { Link } from "react-router-dom"
+import { useSearchParams } from "react-router-dom";
+
 const PaymentMethod =()=>{
+    const [searchParams, setSearchParams] = useSearchParams();
+    const step = searchParams.get("step");
     return (<>
     <div className="w-full h-full ">
         <div  className="py-5 shadow-2xl flex card">
@@ -33,7 +37,7 @@ const PaymentMethod =()=>{
 
         </div>
         <div className="py-5 cursor-pointer font-bold">
-        <Link to='/checkout?step=0'>Trở về </Link>
+        <Link to={`/checkout?step=${step-1}`}>Trở về </Link>
          </div>
 
     </div>    
