@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import useStoreProducts from "../stores/products-store";
 import { delete_product } from "../apis/products";
 import toast from "react-hot-toast";
-const ActionDropDownLeft = ({ item, paths }) => {
+const ActionDropDownLeft = ({ item, paths ,onlyView }) => {
   const { updateSelectedId, updateCurrentSelectProduct ,selectedId} = useStoreProducts();
   const handleOnclick = () => {
     updateSelectedId(item._id);
@@ -41,7 +41,10 @@ const ActionDropDownLeft = ({ item, paths }) => {
               <Eye /> Xem
             </Link>
           </li>
-          <li>
+         {
+          !onlyView && onlyView!==true &&  (
+            <>
+             <li>
             <Link
               to={`/dashboard/product/${item._id}`}
               onClick={handleOnclick}
@@ -80,7 +83,9 @@ const ActionDropDownLeft = ({ item, paths }) => {
                 </div>
               </dialog>
             </button>
-          </li>
+          </li></>
+          )
+         }
         </ul>
       </div>
     </>

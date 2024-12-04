@@ -1,5 +1,10 @@
 import "./App.css";
+
+
+/// @ react
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
+/// @component
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import InternalPage from "./pages/protected/404";
@@ -15,8 +20,13 @@ import ProductManageMentview from "./pages/Dashboard/Admin/product-management/pr
 import ProductDetail from "./pages/Dashboard/Admin/product-management/[id]/ProductDetail";
 import AddNewProduct from "./pages/Dashboard/Admin/product-management/AddNewProduct";
 import PrivateRoute from "./pages/protected/AuthenticatedRoute";
+import TransactionView from "./pages/Dashboard/Admin/transaction-management/transaction-view";
+import CourseManagementView from "./pages/Dashboard/Admin/course-management/course-management-view";
+import CreateNewCourse from "./pages/Dashboard/Admin/course-management/create-course-view";
+// @ config
 import toast, { Toaster } from "react-hot-toast";
 import { paths } from "./config/endPoint";
+
 
 function App() {
   return (
@@ -34,14 +44,20 @@ function App() {
 
           {/* Routes yêu cầu đăng nhập */}
           <Route
-            path={paths.dashboard.root}
             element={<PrivateRoute element={<Dashboard />} />}
           >
-            <Route path="" element={<Dashboard />} />
-            <Route path="product" element={<ProductManageMentview />} />
-            <Route path="product/:id" element={<ProductDetail />} />
-            <Route path="product/addnew" element={<AddNewProduct />} />
-            <Route path="account" element={<AccountView />} />
+            <Route path={paths.dashboard.root} element={<Dashboard />} />
+            <Route path={paths.dashboard.product} element={<ProductManageMentview />} />
+            <Route path={paths.dashboard.transaction} element={<TransactionView/>} />
+
+            <Route path={paths.dashboard.product_detail} element={<ProductDetail />} />
+            <Route path={paths.dashboard.addnew_product} element={<AddNewProduct />} />
+            <Route path={paths.dashboard.account} element={<AccountView />} />
+            <Route path={paths.dashboard.courses} element={<CourseManagementView />} />
+            <Route path={paths.dashboard.courses_create} element={<CreateNewCourse/>} />
+
+            
+
           </Route>
 
           {/* Routes độc lập, không nên nằm trong /dashboard */}
