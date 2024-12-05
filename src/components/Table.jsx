@@ -2,11 +2,19 @@ import { useState } from "react";
 
 ///@child component
 import ActionDropDownLeft from "./Action-dropdown-left";
+import Modal from "./Modal";
 
 //@icon
 import { Database } from "lucide-react";
 
-const Table = ({ title = [], data = [], paths = "/", onlyView = false }) => {
+const Table = ({
+  title = [],
+  data = [],
+  paths = "/",
+  onlyView = false,
+  statusOption = ["Thất bại ", "Đang xử lý ", "Thành công"],
+  ...other
+}) => {
   const [totalPage, setTotalPage] = useState(Math.ceil(data.length / 10));
   const [currentPage, setCurrentPage] = useState(0);
 
@@ -24,7 +32,7 @@ const Table = ({ title = [], data = [], paths = "/", onlyView = false }) => {
 
   return (
     <>
-      <div className="card shadow-xl bg-base-100 w-full h-full px-5">
+      <div className="card shadow-xl bg-base-100 w-full h-auto px-5">
         <div className="overflow-x-auto">
           <table className="table">
             {/* head */}
@@ -60,11 +68,29 @@ const Table = ({ title = [], data = [], paths = "/", onlyView = false }) => {
                             );
                           }
                           if (key === "status" && value === 0)
-                            return <td>Thất bại </td>;
+                            return (
+                              <td className="text-red-700 cursor-pointer">
+                                {statusOption[0]}{" "}
+                              </td>
+                            );
                           if (key === "status" && value === 1)
-                            return <td>Đang xử lý </td>;
+                            return (
+                              <td className="text-yellow-700 cursor-pointer">
+                                {" "}
+                                <Modal
+                                  title={statusOption[1]}
+                                  modalId={statusOption[1]}
+                                  type={other.type}
+                                  item={item}
+                                />
+                              </td>
+                            );
                           if (key === "status" && value === 2)
-                            return <td>Thành công </td>;
+                            return (
+                              <td className="text-green-700 cursor-pointer">
+                                <Modal title={statusOption[2]} />
+                              </td>
+                            );
 
                           return <td key={key}>{value}</td>;
                         })}

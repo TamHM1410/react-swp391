@@ -1,6 +1,5 @@
 import "./App.css";
 
-
 /// @ react
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -23,10 +22,10 @@ import PrivateRoute from "./pages/protected/AuthenticatedRoute";
 import TransactionView from "./pages/Dashboard/Admin/transaction-management/transaction-view";
 import CourseManagementView from "./pages/Dashboard/Admin/course-management/course-management-view";
 import CreateNewCourse from "./pages/Dashboard/Admin/course-management/create-course-view";
+import UserManagementView from "./pages/Dashboard/Admin/users/users-management-view";
 // @ config
 import toast, { Toaster } from "react-hot-toast";
 import { paths } from "./config/endPoint";
-
 
 function App() {
   return (
@@ -41,32 +40,47 @@ function App() {
           <Route path={paths.auth.register} element={<RegisterView />} />
           <Route path={paths.product.root} element={<ProductView />} />
 
-
           {/* Routes yêu cầu đăng nhập */}
-          <Route
-            element={<PrivateRoute element={<Dashboard />} />}
-          >
+          <Route element={<PrivateRoute element={<Dashboard />} />}>
             <Route path={paths.dashboard.root} element={<Dashboard />} />
-            <Route path={paths.dashboard.product} element={<ProductManageMentview />} />
-            <Route path={paths.dashboard.transaction} element={<TransactionView/>} />
+            <Route
+              path={paths.dashboard.product}
+              element={<ProductManageMentview />}
+            />
+            <Route
+              path={paths.dashboard.transaction}
+              element={<TransactionView />}
+            />
 
-            <Route path={paths.dashboard.product_detail} element={<ProductDetail />} />
-            <Route path={paths.dashboard.addnew_product} element={<AddNewProduct />} />
+            <Route
+              path={paths.dashboard.product_detail}
+              element={<ProductDetail />}
+            />
+            <Route
+              path={paths.dashboard.addnew_product}
+              element={<AddNewProduct />}
+            />
             <Route path={paths.dashboard.account} element={<AccountView />} />
-            <Route path={paths.dashboard.courses} element={<CourseManagementView />} />
-            <Route path={paths.dashboard.courses_create} element={<CreateNewCourse/>} />
+            <Route
+              path={paths.dashboard.courses}
+              element={<CourseManagementView />}
+            />
+            <Route
+              path={paths.dashboard.courses_create}
+              element={<CreateNewCourse />}
+            />
 
-            
-
+            {/*Usermanagemnet*/}
+            <Route
+              path={paths.dashboard.user}
+              element={<UserManagementView />}
+            />
           </Route>
 
           {/* Routes độc lập, không nên nằm trong /dashboard */}
           <Route path="" element={<PrivateRoute />}>
             <Route path={paths.checkout.root} element={<Checkout />} />
           </Route>
-
-
-
         </Routes>
         {/* Bỏ Footer nếu không cần */}
         {/* <Footer /> */}

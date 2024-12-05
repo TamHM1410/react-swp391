@@ -12,8 +12,8 @@ export const paths = {
 
     transaction: "/dashboard/transaction",
 
-    product_detail: "/:id",
-    addnew_product: "/product/addnew",
+    product_detail: "/dashboard/product/:id",
+    addnew_product: "/dashboard/product/addnew",
   },
   product: {
     root: "/products",

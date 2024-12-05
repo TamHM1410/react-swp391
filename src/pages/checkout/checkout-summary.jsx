@@ -1,14 +1,22 @@
 import { useNavigate } from "react-router-dom";
 import useCart from "../../stores/cart-store";
 import { checkOut } from "../../apis/cart";
+import toast from "react-hot-toast";
 const CheckoutSummary = ({ step }) => {
   let navigate = useNavigate();
-  const { total, cart, current_infor } = useCart();
+  const { total, cart, current_infor, paymentMethod } = useCart();
 
+  console.log(paymentMethod, "paument");
   const handleClick = async () => {
-    if (step === "0") navigate("/checkout?step=1");
-    if (step === "1") navigate("/checkout?step=0");
-    if (step === "2") {
+    if(step==='0'){
+      navigate("/checkout?step=1");
+
+
+    }else if(step==='1'){
+      navigate("/checkout?step=2");
+
+    }
+    if(step==='2'){
       try {
         const payload = current_infor;
         payload["cart_product"] = cart?.cart_product.map((item) => {
@@ -17,13 +25,14 @@ const CheckoutSummary = ({ step }) => {
             quantity: item.quantity,
           };
         });
-
+        payload["payment_method"] = paymentMethod;
         const res = await checkOut(payload);
-        if (res) {
-          window.location.href = res;
+        if (res && paymentMethod === "VNPAY") {
+          window.location.href = res.data;
         }
+        toast.success(res.message)
+        navigate('/')
 
-        console.log(res, "res");
       } catch (error) {
         console.log(error);
       }

@@ -6,5 +6,5 @@ export const get_carts= async()=>{
 
 export const checkOut=async (payload)=>{
     const res=await  axiosInstance.post('/payments/orders',payload)
-    return res.data
+    return res
 }

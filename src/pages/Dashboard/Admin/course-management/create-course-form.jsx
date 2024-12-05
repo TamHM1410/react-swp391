@@ -2,6 +2,12 @@ import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { useQuery } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
+
+////
+import { create_course, update_course } from "../../../../apis/course";
+import { get_course_cate } from "../../../../apis/course";
 
 // Định nghĩa schema validation bằng yup
 const schema = yup.object().shape({
@@ -13,33 +19,48 @@ const schema = yup.object().shape({
     .string()
     .required("Mô tả ngắn là bắt buộc")
     .min(10, "Mô tả ngắn phải có ít nhất 10 ký tự"),
-  category: yup.string().required("Vui lòng chọn loại khóa học"),
+  stem_id: yup.string().required("Vui lòng chọn loại khóa học"),
 });
 
 const CreateCourseForm = ({ course, updateCourseForm }) => {
+  const { data, isLoading } = useQuery({
+    queryKey: ["cate_product"],
+    queryFn: () => get_course_cate(),
+  });
+
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
     setValue,
+    reset
   } = useForm({
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log("Form submitted: ", data);
-    updateCourseForm(data);
-    // Thực hiện xử lý sau khi submit form (gửi dữ liệu API, v.v)
+    if (course._id === null) {
+      const res = await create_course(data);
+      if (res) {
+        updateCourseForm(res);
+        navigate("/dashboard/courses/create?step=1");
+
+      }
+    }
+    const res=await update_course(data,course._id)
+
   };
 
   useEffect(() => {
     if (course) {
       setValue("description", course.description || "");
       setValue("title", course.title || "");
-      setValue("category", course.stem_id || "");
+      setValue("stem_id", course.stem_id || "");
     }
   }, [course, setValue]);
-
   return (
     <>
       <div className="w-full h-auto p-10 px-5 flex justify-center">
@@ -96,14 +117,16 @@ const CreateCourseForm = ({ course, updateCourseForm }) => {
                 className={`select select-secondary w-full max-w-xs ${
                   errors.category ? "select-error" : ""
                 }`}
-                {...register("category")}
+                {...register("stem_id")}
               >
                 <option disabled selected>
-                  Chọn loại khóa học
+                  Chọn sản phẩm cho khóa học
                 </option>
-                <option value="1">Loại 1</option>
-                <option value="2">Loại 2</option>
-                <option value="3">Loại 3</option>
+                {Array.isArray(data) &&
+                  data.length > 0 &&
+                  data.map((item) => {
+                    return <option value={item._id}>{item.stem_name}</option>;
+                  })}
               </select>
               {errors.category && (
                 <p className="text-red-500 text-sm">

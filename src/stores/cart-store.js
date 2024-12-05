@@ -7,6 +7,8 @@ const useCart = create((set) => ({
   updateCartTotal: (payload) => set({ total: payload }),
   current_infor:null,
   updateInfor:(payload) => set({ current_infor: payload }),
+  paymentMethod:null,
+  updatePaymentMethod:(payload) => set({ paymentMethod: payload }),
 }));
 
 export default useCart;

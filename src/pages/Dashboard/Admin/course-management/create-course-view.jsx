@@ -27,7 +27,7 @@ const CreateNewCourse = () => {
   });
 
   useEffect(() => {
-    if (Number(step) < 0 ||!step) {
+    if (Number(step) < 0 || !step) {
       navigate("/dashboard/courses/create?step=0");
     }
   }, [step, navigate]);
@@ -38,10 +38,7 @@ const CreateNewCourse = () => {
       {step === "0" && (
         <CreateCourseForm course={course} updateCourseForm={updateCourseForm} />
       )}
-     {
-        step==='1' && (      <CreateMultipleLessonsForm/>
-        )
-     }
+      {step === "1" && <CreateMultipleLessonsForm course={course}  />}
     </DashBoardLayout>
   );
 };
