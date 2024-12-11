@@ -23,9 +23,18 @@ import TransactionView from "./pages/Dashboard/Admin/transaction-management/tran
 import CourseManagementView from "./pages/Dashboard/Admin/course-management/course-management-view";
 import CreateNewCourse from "./pages/Dashboard/Admin/course-management/create-course-view";
 import UserManagementView from "./pages/Dashboard/Admin/users/users-management-view";
+import CourseView from "./pages/courses/courses-view";
+import CourseDetailView from "./pages/courses/course-detail-view";
+import OrderHistoryView from "./pages/Dashboard/User/order-history-view";
+import CategoryView from "./pages/Dashboard/Category/category-view";
+import CreateNewCategory from "./pages/Dashboard/Category/create-category";
+/// shipper
+import ShippingView from "./pages/Dashboard/Shipping/shipping-vew";
 // @ config
 import toast, { Toaster } from "react-hot-toast";
 import { paths } from "./config/endPoint";
+
+import Overview from "./pages/Dashboard/overview/overview";
 
 function App() {
   return (
@@ -39,6 +48,19 @@ function App() {
           <Route path={paths.auth.login} element={<LoginView />} />
           <Route path={paths.auth.register} element={<RegisterView />} />
           <Route path={paths.product.root} element={<ProductView />} />
+          <Route path={'/courses'} element={<CourseView />} />
+          <Route path={'/courses/:id'} element={<CourseDetailView />} />
+
+          <Route path={'/dashboard/order_history'} element={<OrderHistoryView/>} />
+
+
+          <Route path={'/dashboard/shipping'} element={<ShippingView/>} />
+
+          
+
+
+
+
 
           {/* Routes yêu cầu đăng nhập */}
           <Route element={<PrivateRoute element={<Dashboard />} />}>
@@ -76,6 +98,13 @@ function App() {
               element={<UserManagementView />}
             />
           </Route>
+
+          <Route path={paths.dashboard.category} element={<CategoryView />} />
+          <Route path={paths.dashboard.create_category} element={<CreateNewCategory />} />
+          <Route path={paths.dashboard.overview} element={<Overview/>} />
+
+
+
 
           {/* Routes độc lập, không nên nằm trong /dashboard */}
           <Route path="" element={<PrivateRoute />}>

@@ -7,6 +7,6 @@ export const updateUserInfor = async (payload) => {
 
 //  @admin management user
 export const get_all_user = async (payload) => {
-  const res = await axiosInstance.get("/users");
+  const res = await axiosInstance.get(`/users?role=${payload}`);
   return res.data;
 };

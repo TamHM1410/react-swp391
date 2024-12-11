@@ -8,3 +8,9 @@ export const create_new_lessoon = async (payload) => {
   });
   return res;
 };
+
+
+export const get_lesson_by_id=async(payload)=>{
+   const res=await axiosInstance.get(`/lessons/${payload}`)
+   return res.data
+}

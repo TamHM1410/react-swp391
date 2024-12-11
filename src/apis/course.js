@@ -21,3 +21,14 @@ export const get_course_cate = async () => {
   const res = await axiosInstance.get("/courses/products");
   return res.data;
 };
+
+///user
+export const get_user_course = async () => {
+  const res = await axiosInstance.get("/users/courses");
+  return res.data;
+};
+
+export const get_course_by_id=async(id)=>{
+  const res =await axiosInstance.get(`/courses/${id}`)
+  return res.data
+}

@@ -1,7 +1,11 @@
 import { Link } from "react-router-dom";
 import { dashboardConfig } from "../config/dashboard-layout-config";
+import { useAuth } from "../hooks/useAuth";
+
 const DashBoardLayout = ({ children }) => {
-  const config = dashboardConfig();
+  const auth = useAuth();
+  console.log(auth.role)
+  const config = dashboardConfig(auth?.role);
 
   return (
     <>
@@ -36,14 +40,12 @@ const DashBoardLayout = ({ children }) => {
                             return (
                               <>
                                 <li>
-                           
-                                    <Link to={sub.path} className="flex gap-2">
-                                      <sub.icon />
-                                      <span className="flex items-center font-semibold	">
-                                        {sub.name}
-                                      </span>
-                                    </Link>
-                                  
+                                  <Link to={sub.path} className="flex gap-2">
+                                    <sub.icon />
+                                    <span className="flex items-center font-semibold	">
+                                      {sub.name}
+                                    </span>
+                                  </Link>
                                 </li>
                               </>
                             );

@@ -7,7 +7,10 @@ const Header = () => {
   const navigate=useNavigate()
   const handleLogOut=()=>{
     localStorage.clear()
-    navigate('/auth/login')
+    navigate('/')
+
+    window.location.reload();
+
 
   }
   return (
@@ -61,7 +64,7 @@ const Header = () => {
             <Link to="/products">Sản phẩm</Link>
           </li>
           <li>
-            <Link to="/contact">Liên hệ</Link>
+            <Link to="/courses">Khoa hoc</Link>
           </li>
           <li>
             <a>Câu hỏi thường gặp</a>

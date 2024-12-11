@@ -2,21 +2,19 @@ import { useNavigate } from "react-router-dom";
 import useCart from "../../stores/cart-store";
 import { checkOut } from "../../apis/cart";
 import toast from "react-hot-toast";
+import { useQueryClient } from "@tanstack/react-query";
 const CheckoutSummary = ({ step }) => {
   let navigate = useNavigate();
+  const queryClient = useQueryClient();
   const { total, cart, current_infor, paymentMethod } = useCart();
 
-  console.log(paymentMethod, "paument");
   const handleClick = async () => {
-    if(step==='0'){
+    if (step === "0") {
       navigate("/checkout?step=1");
-
-
-    }else if(step==='1'){
+    } else if (step === "1") {
       navigate("/checkout?step=2");
-
     }
-    if(step==='2'){
+    if (step === "2") {
       try {
         const payload = current_infor;
         payload["cart_product"] = cart?.cart_product.map((item) => {
@@ -30,9 +28,9 @@ const CheckoutSummary = ({ step }) => {
         if (res && paymentMethod === "VNPAY") {
           window.location.href = res.data;
         }
-        toast.success(res.message)
-        navigate('/')
-
+        queryClient.invalidateQueries(["carts"]);
+        toast.success(res.message);
+        navigate("/dashboard/order_history");
       } catch (error) {
         console.log(error);
       }
@@ -46,7 +44,13 @@ const CheckoutSummary = ({ step }) => {
           <h2 className="card-title">Chi tiết đơn hàng</h2>
           <div className="flex justify-between">
             <div> Tạm tính </div>
-            <div> {total} </div>
+            <div>
+              {" "}
+              {new Intl.NumberFormat("vi-VN", {
+                style: "currency",
+                currency: "VND",
+              }).format(total)}
+            </div>
           </div>
           <div className="flex justify-between">
             <div> Giảm giá </div>
@@ -54,7 +58,13 @@ const CheckoutSummary = ({ step }) => {
           </div>
           <div className="flex justify-between">
             <div> Tổng tiền </div>
-            <div> {total}</div>
+            <div>
+              {" "}
+              {new Intl.NumberFormat("vi-VN", {
+                style: "currency",
+                currency: "VND",
+              }).format(total)}
+            </div>
           </div>
         </div>
         <div className="w-full">

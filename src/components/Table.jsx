@@ -12,7 +12,8 @@ const Table = ({
   data = [],
   paths = "/",
   onlyView = false,
-  statusOption = ["Thất bại ", "Đang xử lý ", "Thành công"],
+  statusOption = ["Thất bại ", "Đang xử lý ", "Thành công", "4", "5"],
+  subKeyTitle = ["Địa chỉ"],
   ...other
 }) => {
   const [totalPage, setTotalPage] = useState(Math.ceil(data.length / 10));
@@ -52,13 +53,11 @@ const Table = ({
                     <tr key={index}>
                       <td>{index + 1}</td>
                       {Object.entries(item)
-                        .filter(([key]) => key !== "_id" && key !== "stem_slug") // Loại bỏ cột 'id'
+                        .filter(([key]) => key !== "_id" && key !== "stem_slug") // Loại bỏ cột '_id' và 'stem_slug'
                         .map(([key, value]) => {
-                          console.log("key", key, "value:", value);
                           if (key === "thumb_image") {
                             return (
-                              <td>
-                                {" "}
+                              <td key={key}>
                                 <img
                                   src={value}
                                   alt=""
@@ -69,36 +68,103 @@ const Table = ({
                           }
                           if (key === "status" && value === 0)
                             return (
-                              <td className="text-red-700 cursor-pointer">
-                                {statusOption[0]}{" "}
+                              <td
+                                key={key}
+                                className="text-red-700 cursor-pointer"
+                              >
+                                {statusOption[0]}
                               </td>
                             );
                           if (key === "status" && value === 1)
                             return (
-                              <td className="text-yellow-700 cursor-pointer">
-                                {" "}
+                              <td
+                                key={key}
+                                className="text-yellow-700 cursor-pointer"
+                              >
                                 <Modal
                                   title={statusOption[1]}
                                   modalId={statusOption[1]}
                                   type={other.type}
                                   item={item}
+                                  text='yellow'
                                 />
                               </td>
                             );
                           if (key === "status" && value === 2)
                             return (
-                              <td className="text-green-700 cursor-pointer">
+                              <td
+                                key={key}
+                                className="text-green-700 cursor-pointer"
+                              >
                                 <Modal title={statusOption[2]} />
                               </td>
                             );
+                          if (key === "status" && value === 3)
+                            return (
+                              <td
+                                key={key}
+                                className="text-green-700 cursor-pointer"
+                              >
+                                {statusOption[3]}
+                              </td>
+                            );
+                          if (key === "status" && value === 4)
+                            return (
+                              <td
+                                key={key}
+                                className="text-red-700 cursor-pointer"
+                              >
+                                <Modal
+                                  title={statusOption[4]}
+                                  modalId={statusOption[4]}
+                                  type={other.type}
+                                  item={item}
+                                  text='red'
+                                />
+                              </td>
+                            );
 
+                          // Xử lý nếu giá trị là object
+                          if (typeof value === "object" && value !== null) {
+                            return (
+                              <td key={key}>
+                                <div className="flex flex-col">
+                                  {Object.entries(value)
+                                    .filter(([subKey]) => subKey !== "_id") // Loại bỏ '_id' trong object con
+                                    .map(([subKey, subValue], subIndex) => {
+                                      if (Object.entries(value).length > 2) {
+                                        return (
+                                          <div
+                                            key={`${key}-${subKey}-${subIndex}`}
+                                          >
+                                            {subKeyTitle[subIndex]} : &nbsp;{" "}
+                                            {String(subValue)}
+                                          </div>
+                                        );
+                                      }
+                                      return (
+                                        <div
+                                          key={`${key}-${subKey}-${subIndex}`}
+                                        >
+                                          {String(subValue)}
+                                        </div>
+                                      );
+                                    })}
+                                </div>
+                              </td>
+                            );
+                          }
+
+                          // Xử lý các giá trị thông thường
                           return <td key={key}>{value}</td>;
                         })}
+
                       <td>
                         <ActionDropDownLeft
                           item={item}
                           paths={paths}
                           onlyView={onlyView}
+                          type={other.type}
                         />
                       </td>
                     </tr>
@@ -120,7 +186,7 @@ const Table = ({
         )}
       </div>
 
-      <div className="w-full flex items-center justify-center py-5">
+      {/* <div className="w-full flex items-center justify-center py-5">
         <div className="join">
           <button
             className="join-item btn btn-outline"
@@ -148,7 +214,7 @@ const Table = ({
             Next
           </button>
         </div>
-      </div>
+      </div> */}
     </>
   );
 };

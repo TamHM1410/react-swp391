@@ -23,7 +23,7 @@ const AddNewProduct = () => {
     queryFn: async () => {
       const res = await getCategories();
 
-      return res.data;
+      return res;
     },
   });
 

@@ -1,4 +1,51 @@
+import { update_cart } from "../../apis/cart";
+import useCart from "../../stores/cart-store";
+import { useQueryClient } from "@tanstack/react-query";
 const ProductList = ({ data = [] }) => {
+  const { cart } = useCart();
+
+  const queryClient = useQueryClient();
+
+  const handleAddToCart = async (item) => {
+    try {
+      // Ensure cart_product is an array
+      const cartProducts = cart?.cart_product || [];
+      
+      // Check if item already exists in cart
+      const existingItemIndex = cartProducts.findIndex(
+        cartItem => cartItem.stem_id._id === item._id
+      );
+  
+      if (existingItemIndex !== -1) {
+        // Update quantity of existing item
+        cartProducts[existingItemIndex].quantity += 1;
+      } else {
+        // Add new item to cart
+        cartProducts.push({
+          stem_id: { _id: item._id },
+          quantity: 1
+        });
+      }
+  
+      // Prepare payload for update
+      const payload = cartProducts.map(product => ({
+        quantity: product.quantity,
+        stem_id: product.stem_id._id
+      }));
+  
+      // Update cart
+      console.log('payoad',payload)
+      const res = await update_cart({
+        cart_product:payload
+      });
+      
+      // Invalidate cart queries
+      queryClient.invalidateQueries(["carts"]);
+  
+    } catch (error) {
+      console.error("Error adding item to cart:", error);
+    }
+  };
   return (
     <div className="w-full h-full p-5 sm:p-10 ">
       <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-4">
@@ -30,7 +77,12 @@ const ProductList = ({ data = [] }) => {
                         currency: "VND",
                       }).format(item.stem_price)}
                     </button>
-                    <button className="btn btn-neutral">Xem ngay</button>
+                    <button
+                      className="btn btn-neutral"
+                      onClick={() => handleAddToCart(item)}
+                    >
+                      Thêm vào giỏ hàng
+                    </button>
                   </div>
                 </div>
               </div>

@@ -28,6 +28,8 @@ const LoginView = () => {
       localStorage.setItem("user", JSON.stringify(res.data?.payload.user));
       reset();
       navigate('/')
+      window.location.reload();
+
     } catch (error) {
       toast.error(error.message);
     }

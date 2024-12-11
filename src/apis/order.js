@@ -4,3 +4,10 @@ export const update_oders = async (payload, id) => {
     return res.data;
   };
   
+
+
+  //// get user order history 
+  export const user_order =async()=>{
+    const res=await axiosInstance.get('/orders/users')
+    return res.data
+  }

@@ -2,13 +2,20 @@ export const paths = {
   root: "/",
   dashboard: {
     root: "/dashboard",
-    overview: "/dashboard/  overview",
+    overview: "/dashboard/overview",
     analytic: "/dashboard/analytic",
     account: "/dashboard/account",
     product: "/dashboard/product",
     user: "/dashboard/user",
     courses: "/dashboard/courses",
     courses_create: "/dashboard/courses/create",
+    category: "/dashboard/category",
+    create_category: "/dashboard/category/create",
+
+
+    shipping: "/dashboard/shipping",
+    order_history:'/dashboard/order_history',
+
 
     transaction: "/dashboard/transaction",
 
