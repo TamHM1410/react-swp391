@@ -68,7 +68,7 @@ const CourseView = () => {
                         <div className="card bg-base-100 w-96 h-96 shadow-xl">
                           <figure>
                             <img
-                              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQppJKxBxJI-9UWLe2VVmzuBd24zsq4_ihxZw&s"
+                              src="https://free.vector6.com/wp-content/uploads/2021/03/0000000612-tre-em-hoc-bai-hoc-tap-cau-be-tai-hinh-png-94.png"
                               alt="Shoes"
                             />
                           </figure>
