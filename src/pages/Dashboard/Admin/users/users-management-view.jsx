@@ -48,6 +48,7 @@ const UserManagementView = () => {
           title={tableTitle}
           onlyView={true}
           statusOption={statusOption}
+          paths="/dashboard/user"
         />
 
         <div className="py-10">
@@ -58,7 +59,9 @@ const UserManagementView = () => {
             title={tableTitle}
             onlyView={true}
             statusOption={statusOption}
-          />
+            paths="/dashboard/user"
+
+            />
         </div>
       </DashBoardLayout>
     </>

@@ -11,6 +11,8 @@ export const paths = {
     courses_create: "/dashboard/courses/create",
     category: "/dashboard/category",
     create_category: "/dashboard/category/create",
+    courses_detail: "/dashboard/course/:id",
+
 
 
     shipping: "/dashboard/shipping",

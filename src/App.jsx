@@ -28,6 +28,8 @@ import CourseDetailView from "./pages/courses/course-detail-view";
 import OrderHistoryView from "./pages/Dashboard/User/order-history-view";
 import CategoryView from "./pages/Dashboard/Category/category-view";
 import CreateNewCategory from "./pages/Dashboard/Category/create-category";
+import CourseDetail from "./pages/Dashboard/Admin/course-management/[id]/course-detail-view";
+import UserDetail from "./pages/Dashboard/Admin/users/[id]/user-detail";
 /// shipper
 import ShippingView from "./pages/Dashboard/Shipping/shipping-vew";
 // @ config
@@ -55,6 +57,9 @@ function App() {
 
 
           <Route path={'/dashboard/shipping'} element={<ShippingView/>} />
+          <Route path={paths.dashboard.courses_detail} element={<CourseDetail />} />
+          <Route path={'/dashboard/user/:id'} element={<UserDetail />} />
+
 
           
 

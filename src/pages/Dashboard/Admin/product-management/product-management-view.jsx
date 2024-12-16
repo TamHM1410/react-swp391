@@ -34,7 +34,7 @@ const ProductManageMentview = () => {
 
           {/* <AddNewProdcuct /> */}
 
-          <ProductTable  data={data}/>
+          <ProductTable  data={data} type='product'/>
         </div>
     </DashBoardLayout>
     </>

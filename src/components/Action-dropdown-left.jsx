@@ -2,14 +2,13 @@ import { EllipsisVertical, Eye, Pencil, Trash2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import useStoreProducts from "../stores/products-store";
 
-
 /// @api
 import { delete_product } from "../apis/products";
 import { delete_category } from "../apis/categories";
+import { del_course } from "../apis/course";
 
 //  @component
 import toast from "react-hot-toast";
-
 
 const ActionDropDownLeft = ({ item, paths, onlyView, type }) => {
   const { updateSelectedId, updateCurrentSelectProduct, selectedId } =
@@ -19,22 +18,38 @@ const ActionDropDownLeft = ({ item, paths, onlyView, type }) => {
     updateCurrentSelectProduct(item);
   };
 
-  console.log(selectedId, "tcurrent ype",type);
+  
+
+  console.log(paths, "tcurrent ype", type);
 
   const onSubmit = async () => {
     try {
-
-      if(type==="category"){
-        const res = await delete_category(selectedId);
-        if (res) {
-          toast.success("Xóa sản phẩm thành công");
+      switch (type) {
+        case "category": {
+          const res = await delete_category(selectedId);
+          if (res) {
+            toast.success("Xóa sản phẩm thành công");
+          }
+          return;
         }
-        return
 
-      }
-      const res = await delete_product(selectedId);
-      if (res) {
-        toast.success("Xóa sản phẩm thành công");
+        case "course": {
+          const res = await del_course(selectedId);
+          if (res) {
+            toast.success("Xóa sản phẩm thành công");
+          }
+          return;
+        }
+        case "product": {
+          await delete_product(selectedId);
+          if (res) {
+            toast.success("Xóa sản phẩm thành công");
+          }
+          return;
+        }
+
+        default:
+          return;
       }
     } catch (error) {
       toast.error(error.message);
@@ -51,7 +66,7 @@ const ActionDropDownLeft = ({ item, paths, onlyView, type }) => {
           className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-1 shadow h-auto"
         >
           <li className=" pt-2">
-            <Link to={`/dashboard/product/${item._id}`} onClick={handleOnclick}>
+            <Link to={`${paths}/${item._id}`} onClick={handleOnclick}>
               <Eye /> Xem
             </Link>
           </li>

@@ -12,7 +12,12 @@ export const create_course = async (payload) => {
 };
 
 export const update_course = async (payload, id) => {
-  const res = await axiosInstance.post(`/courses/${id}`, payload);
+  const res = await axiosInstance.patch(`/courses/${id}`, payload);
+  return res.data;
+};
+
+export const get_course_id = async (id) => {
+  const res = await axiosInstance.get(`/courses/${id}`);
   return res.data;
 };
 
@@ -21,6 +26,11 @@ export const get_course_cate = async () => {
   const res = await axiosInstance.get("/courses/products");
   return res.data;
 };
+
+export const del_course=async(payload)=>{
+  const res= await axiosInstance.delete(`/courses/${payload}`)
+  return res.data
+}
 
 ///user
 export const get_user_course = async () => {

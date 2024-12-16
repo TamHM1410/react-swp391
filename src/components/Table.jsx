@@ -30,7 +30,7 @@ const Table = ({
       setCurrentPage(currentPage + 1);
     }
   };
-
+ console.log(paths,'pathss')
   return (
     <>
       <div className="card shadow-xl bg-base-100 w-full h-auto px-5">

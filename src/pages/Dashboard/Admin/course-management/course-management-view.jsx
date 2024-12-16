@@ -32,7 +32,7 @@ const CourseManagementView = () => {
         <div className="w-full py-5 text-[26px]">
           <div> Danh sách các khóa học</div>
           <div>
-            <Table title={tableTitle} onlyView={true} data={data}/>
+            <Table title={tableTitle} onlyView={false} data={data} paths="/dashboard/course" type='course'/>
           </div>
         </div>
       </DashBoardLayout>
