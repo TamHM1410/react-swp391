@@ -11,7 +11,7 @@ const DashBoardLayout = ({ children }) => {
     <>
       <div className="w-full min-h-[100vh] flex gap-2 font-semibold	">
         <div className="w-1/5">
-          <div className="drawer lg:drawer-open">
+          <div className="drawer lg:drawer-open  h-full">
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
             <div className="drawer-content flex flex-col items-center justify-center">
               {/* Page content here */}

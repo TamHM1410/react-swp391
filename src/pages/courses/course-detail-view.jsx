@@ -6,21 +6,19 @@ import { get_course_by_id } from "../../apis/course";
 import { get_lesson_by_id } from "../../apis/lesson";
 import PDFViewer from "../../components/PDFviewer";
 
-
 const LessonView = (data) => {
   return (
     <div>
-              <div className="py-10">Video bai hoc</div>
+      <div className="py-10">Video bài học</div>
 
-      <div style={{ position: "relative", paddingBottom: "56.25%", height: 0 }}>
-
+      <div style={{ position: "relative", paddingBottom: "56.25%", height: 0 }} className="flex justify-center">
         <iframe
           src={data?.data.lesson_videoUrl}
           style={{
             position: "absolute",
             top: 0,
             left: 0,
-            width: "100%",
+            width: "80%",
             height: "100%",
             border: "none",
           }}
@@ -29,20 +27,21 @@ const LessonView = (data) => {
           allowFullScreen
         ></iframe>
       </div>
-      <div className="py-10">
-        Tai lieu hoc tap
-      </div>
-      <div className="pt-5" style={{ position: "relative", paddingBottom: "56.25%", height: 0 }}>
-      <PDFViewer url={data?.data.lesson_material} />
-
+      <div className="py-5">Tài liệu học tập:</div>
+      <div
+        className="pt-5"
+        style={{ position: "relative", paddingBottom: "56.25%", height: 0 }}
+      >
+        <PDFViewer url={data?.data.lesson_material} />
+      
         <iframe
           src={data?.data.lesson_material}
           style={{
             position: "absolute",
             top: 0,
             left: 0,
-            width: "100%",
-            height: "100%",
+            width: "80%",
+            height: "60%",
             border: "none",
           }}
           title="YouTube Video"
@@ -90,9 +89,7 @@ const CourseDetailView = () => {
             : []
         }
       >
-        {
-           result[1].data && <LessonView  data={result[1].data}/>
-        }
+        {result[1].data && <LessonView data={result[1].data} />}
       </CourseLayout>
     </>
   );
