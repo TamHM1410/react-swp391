@@ -7,6 +7,9 @@ import Modal from "./Modal";
 //@icon
 import { Database } from "lucide-react";
 
+//  @store
+import useStoreProducts from "../stores/products-store";
+
 const Table = ({
   title = [],
   data = [],
@@ -19,6 +22,14 @@ const Table = ({
   const [totalPage, setTotalPage] = useState(Math.ceil(data.length / 10));
   const [currentPage, setCurrentPage] = useState(0);
 
+  const { updateSelectedId, updateCurrentSelectProduct, selectedId } =
+    useStoreProducts();
+
+  const handleOnclick = (item) => {
+    updateSelectedId(item._id);
+    updateCurrentSelectProduct(item);
+  };
+
   const handlePreviousPage = () => {
     if (currentPage > 0) {
       setCurrentPage(currentPage - 1);
@@ -30,7 +41,7 @@ const Table = ({
       setCurrentPage(currentPage + 1);
     }
   };
- console.log(paths,'pathss')
+  console.log(paths, "pathss");
   return (
     <>
       <div className="card shadow-xl bg-base-100 w-full h-auto px-5">
@@ -86,7 +97,7 @@ const Table = ({
                                   modalId={statusOption[1]}
                                   type={other.type}
                                   item={item}
-                                  text='yellow'
+                                  text="yellow"
                                 />
                               </td>
                             );
@@ -119,7 +130,7 @@ const Table = ({
                                   modalId={statusOption[4]}
                                   type={other.type}
                                   item={item}
-                                  text='red'
+                                  text="red"
                                 />
                               </td>
                             );
@@ -159,7 +170,7 @@ const Table = ({
                           return <td key={key}>{value}</td>;
                         })}
 
-                      <td>
+                      <td >
                         <ActionDropDownLeft
                           item={item}
                           paths={paths}

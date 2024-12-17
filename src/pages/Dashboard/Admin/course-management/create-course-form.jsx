@@ -19,7 +19,9 @@ const schema = yup.object().shape({
     .string()
     .required("Mô tả ngắn là bắt buộc")
     .min(10, "Mô tả ngắn phải có ít nhất 10 ký tự"),
-  stem_id: yup.string().required("Vui lòng chọn loại khóa học"),
+  stem_id: yup
+    .string()
+    .required("Vui lòng chọn sản phẩm tương ứng với  khóa học"),
 });
 
 const CreateCourseForm = ({ course, updateCourseForm }) => {
@@ -30,28 +32,30 @@ const CreateCourseForm = ({ course, updateCourseForm }) => {
 
   const navigate = useNavigate();
 
+  console.log(course, "course");
   const {
     register,
     handleSubmit,
     formState: { errors },
     setValue,
-    reset
+    reset,
   } = useForm({
     resolver: yupResolver(schema),
   });
 
   const onSubmit = async (data) => {
-    console.log("Form submitted: ", data);
     if (course._id === null) {
       const res = await create_course(data);
       if (res) {
         updateCourseForm(res);
         navigate("/dashboard/courses/create?step=1");
-
       }
     }
-    const res=await update_course(data,course._id)
-
+    const res = await update_course(data, course._id);
+    if (res) {
+      updateCourseForm(res);
+      navigate("/dashboard/courses/create?step=1");
+    }
   };
 
   useEffect(() => {
@@ -112,7 +116,7 @@ const CreateCourseForm = ({ course, updateCourseForm }) => {
 
             {/* Loại khóa học (Select) */}
             <div className="mb-4">
-              <label className="block text-sm font-medium mb-1">Loại</label>
+              <label className="block text-sm font-medium mb-1">Sản phẩm</label>
               <select
                 className={`select select-secondary w-full max-w-xs ${
                   errors.category ? "select-error" : ""
@@ -138,7 +142,7 @@ const CreateCourseForm = ({ course, updateCourseForm }) => {
             {/* Nút hành động */}
             <div className="flex gap-2 mt-4 justify-end">
               <button type="submit" className="btn btn-primary">
-                Tạo khóa học
+               {course?._id  ? 'Tiếp' :' Tạo khóa học'}
               </button>
             </div>
           </form>

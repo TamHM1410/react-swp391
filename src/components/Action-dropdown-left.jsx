@@ -11,6 +11,7 @@ import { del_course } from "../apis/course";
 import toast from "react-hot-toast";
 
 const ActionDropDownLeft = ({ item, paths, onlyView, type }) => {
+
   const { updateSelectedId, updateCurrentSelectProduct, selectedId } =
     useStoreProducts();
   const handleOnclick = () => {
@@ -18,11 +19,10 @@ const ActionDropDownLeft = ({ item, paths, onlyView, type }) => {
     updateCurrentSelectProduct(item);
   };
 
-  
 
-  console.log(paths, "tcurrent ype", type);
-
-  const onSubmit = async () => {
+  const onSubmit = async (e) => {
+    e.preventDefault()
+    console.log(selectedId,'selected')
     try {
       switch (type) {
         case "category": {
@@ -41,7 +41,7 @@ const ActionDropDownLeft = ({ item, paths, onlyView, type }) => {
           return;
         }
         case "product": {
-          await delete_product(selectedId);
+         const res= await delete_product(selectedId);
           if (res) {
             toast.success("Xóa sản phẩm thành công");
           }
@@ -85,8 +85,10 @@ const ActionDropDownLeft = ({ item, paths, onlyView, type }) => {
                 <button
                   className="text-red-700 "
                   onClick={() => {
-                    document.getElementById("my_modal_5").showModal();
                     handleOnclick();
+                    
+                    document.getElementById("my_modal_5").showModal();
+                   
                   }}
                 >
                   <Trash2 />
@@ -101,7 +103,7 @@ const ActionDropDownLeft = ({ item, paths, onlyView, type }) => {
                         Bạn có chắc muốn xóa ?
                       </div>
                       <div className="modal-action">
-                        <form method="dialog " onSubmit={onSubmit}>
+                        <form method="dialog " onSubmit={(e)=>onSubmit(e)}>
                           {/* if there is a button in form, it will close the modal */}
                           <button
                             className="btn mr-2"

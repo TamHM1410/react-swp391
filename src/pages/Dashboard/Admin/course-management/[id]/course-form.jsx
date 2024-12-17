@@ -88,6 +88,15 @@ const CourseForm = ({data=[]}) => {
       </div>
 
       <div className="bg-white p-6 rounded-lg shadow-sm">
+        <label className="block text-sm font-semibold text-gray-800">Tên sản phẩm theo khóa học</label>
+        <input
+        value={data?.stem_id?.stem_name}
+          placeholder="Nhập tên khóa học"
+          className="mt-2 block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+        />
+      </div>
+
+      <div className="bg-white p-6 rounded-lg shadow-sm">
         <label className="block text-sm font-semibold text-gray-800">Mô tả khóa học</label>
         <textarea
           {...register("description", { required: "Mô tả khóa học là bắt buộc." })}

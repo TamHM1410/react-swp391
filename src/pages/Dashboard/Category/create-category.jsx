@@ -61,7 +61,7 @@ const CreateNewCategory = () => {
         <input
           id="category_name"
           {...register("category_name", {
-            required: "Category name is required",
+            required: "Bắt buộc",
             maxLength: {
               value: 50,
               message: "Category name must not exceed 50 characters",
@@ -81,7 +81,7 @@ const CreateNewCategory = () => {
         <textarea
           id="category_description"
           {...register("category_description", {
-            required: "Category description is required",
+            required: "Bắt buộc",
             maxLength: {
               value: 100,
               message: "Category description must not exceed 100 characters",

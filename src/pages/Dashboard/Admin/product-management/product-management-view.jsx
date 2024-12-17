@@ -7,38 +7,32 @@ import { get_products } from "../../../../apis/products";
 import { Link } from "react-router-dom";
 
 const ProductManageMentview = () => {
-  
-  const {data,isLoading}=useQuery({
-    queryKey:['products'],
-    queryFn:async ()=>{
-      const res=await get_products()
-      return res
-    }
-  })
+  const { data, isLoading } = useQuery({
+    queryKey: ["products"],
+    queryFn: async () => {
+      const res = await get_products();
+      console.log(res,'res')
+      return res;
+    },
+  });
 
-  
   return (
     <>
-    <DashBoardLayout>
+      <DashBoardLayout>
         <div>
           <BreadcrumbProduct />
 
           <div>
-            <button className="btn" type="button">
-              <Link to='/dashboard/product/addnew'>            Thêm mới sản phẩm
-
-              </Link>
-
-            </button>
+            <Link to="/dashboard/product/addnew" className="btn"> Thêm mới sản phẩm</Link>
           </div>
 
           {/* <AddNewProdcuct /> */}
 
-          <ProductTable  data={data} type='product'/>
+          <ProductTable data={data}  />
         </div>
-    </DashBoardLayout>
+      </DashBoardLayout>
     </>
   );
 };
-    
+
 export default ProductManageMentview;

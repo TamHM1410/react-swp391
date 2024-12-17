@@ -162,14 +162,14 @@ const AddNewProduct = () => {
 
             {/* Loại sản phẩm (Select) */}
             <div className="mb-4">
-              <label className="block text-sm font-medium mb-1">Loại</label>
+              <label className="block text-sm font-medium mb-1">Sản phẩm</label>
 
               <select
                 className="select select-secondary w-full max-w-xs"
                 {...register("stem_category", { required: true })} // Đăng ký với react-hook-form
               >
                 <option disabled selected>
-                  Chọn loại
+                  Chọn sản phẩm tương ứng khóa học
                 </option>
                 {data &&
                   Array.isArray(data) &&
@@ -227,7 +227,7 @@ const AddNewProduct = () => {
                 onClick={handleRemoveAll}
                 className="btn btn-outline"
               >
-                Remove all
+                Xóa
               </button>
               <button type="submit" className="btn btn-primary">
                 Tạo sản phẩm

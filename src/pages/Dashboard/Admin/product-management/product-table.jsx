@@ -6,7 +6,7 @@ const ProductTable = ({data=[]}) => {
   
   return (
     <div className="px-5 py-5 w-full h-full">
-      <Table  title={title} data={data} paths="/dashboard/product" />
+      <Table  title={title} data={data} paths="/dashboard/product" type="product"/>
     </div>
   );
 };
