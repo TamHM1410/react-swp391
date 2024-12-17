@@ -10,7 +10,11 @@ import { del_course } from "../apis/course";
 //  @component
 import toast from "react-hot-toast";
 
+import { useQueryClient } from "@tanstack/react-query";
+
 const ActionDropDownLeft = ({ item, paths, onlyView, type }) => {
+
+  const queryClient=useQueryClient()
 
   const { updateSelectedId, updateCurrentSelectProduct, selectedId } =
     useStoreProducts();
@@ -21,40 +25,44 @@ const ActionDropDownLeft = ({ item, paths, onlyView, type }) => {
 
 
   const onSubmit = async (e) => {
-    e.preventDefault()
-    console.log(selectedId,'selected')
     try {
       switch (type) {
         case "category": {
           const res = await delete_category(selectedId);
           if (res) {
-            toast.success("Xóa sản phẩm thành công");
+            toast.success("Xóa danh mục thành công");
+            queryClient.invalidateQueries({ queryKey: ['categories'] });
+            document.getElementById("my_modal_5").close();
           }
           return;
         }
-
+  
         case "course": {
           const res = await del_course(selectedId);
           if (res) {
-            toast.success("Xóa sản phẩm thành công");
+            toast.success("Xóa khóa học thành công");
+            queryClient.invalidateQueries({ queryKey: ['courses'] });
+            document.getElementById("my_modal_5").close();
           }
           return;
         }
         case "product": {
-         const res= await delete_product(selectedId);
+          const res = await delete_product(selectedId);
           if (res) {
             toast.success("Xóa sản phẩm thành công");
+            queryClient.invalidateQueries({ queryKey: ['products'] });
+            document.getElementById("my_modal_5").close();
           }
           return;
         }
-
+  
         default:
           return;
       }
     } catch (error) {
       toast.error(error.message);
     }
-  };
+  };;
   return (
     <>
       <div className="dropdown dropdown-left dropdown-end h-full p-5">
@@ -93,34 +101,30 @@ const ActionDropDownLeft = ({ item, paths, onlyView, type }) => {
                 >
                   <Trash2 />
                   Xóa
-                  <dialog
-                    id="my_modal_5"
-                    className="modal modal-bottom sm:modal-middle"
-                  >
-                    <div className="modal-box">
-                      <h3 className="font-bold text-lg">Muốn xóa</h3>
-                      <div className="py-4 text-[26px]">
-                        Bạn có chắc muốn xóa ?
-                      </div>
-                      <div className="modal-action">
-                        <form method="dialog " onSubmit={(e)=>onSubmit(e)}>
-                          {/* if there is a button in form, it will close the modal */}
-                          <button
-                            className="btn mr-2"
-                            type="button"
-                            onClick={() =>
-                              document.getElementById("my_modal_5").close()
-                            }
-                          >
-                            Hủy bỏ
-                          </button>
-                          <button className="btn" type="submit">
-                            Xác nhận
-                          </button>
-                        </form>
-                      </div>
-                    </div>
-                  </dialog>
+                  <dialog id="my_modal_5" className="modal">
+  <div className="modal-box">
+    <h3 className="font-bold text-lg">Muốn xóa</h3>
+    <p className="py-4">Bạn có chắc muốn xóa?</p>
+    <div className="modal-action">
+      <form method="dialog">
+        {/* Nút close tự động với Daisy UI */}
+        <button 
+          className="btn mr-2"
+          onClick={() => document.getElementById("my_modal_5").close()}
+        >
+          Hủy bỏ
+        </button>
+        <button 
+          className="btn" 
+          type="submit"
+          onClick={()=>onSubmit()}
+        >
+          Xác nhận
+        </button>
+      </form>
+    </div>
+  </div>
+</dialog>
                 </button>
               </li>
             </>
