@@ -6,7 +6,7 @@ const Hero = () => {
 
   return (
     <div className="flex flex-col px-10 w-full h-[50vh] justify-center pt-14">
-      <div className="flex justify-center text-white  p-5">
+      {/* <div className="flex justify-center text-white  p-5">
       {text.map((el, i) => (
           <motion.span
             key={i}
@@ -38,7 +38,25 @@ const Hero = () => {
 
         </div>
 
+      </div> */}
+        <section className="flex justify-center">
+      <div className='container'>
+        <div className="hero h-96 md:h-[500px] rounded-box overflow-hidden" style={{ backgroundImage: `url("https://placeimg.com/1000/800/tech")` }}>
+          <div className="hero-overlay bg-opacity-60 bg-secondary"></div>
+          <div className="hero-content text-center text-secondary-content">
+            <div className="max-w-lg">
+              <h1 className="mb-5 sm:mb-7 text-4xl sm:text-5xl font-bold">
+                FPT SWP391 STEM
+              </h1>
+              <p className="mb-5 sm:mb-7 sm:text-lg">
+                Cung cấp các sản phẩm  toàn diện cho giáo dục Stem
+              </p>
+              <Link className="btn btn-warning sm:btn-wide" to={'/products'}>Khám phá ngay</Link>
+            </div>
+          </div>
+        </div>
       </div>
+    </section>
     </div>
   );
 };

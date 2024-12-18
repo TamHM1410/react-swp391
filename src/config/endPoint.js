@@ -20,6 +20,8 @@ export const paths = {
 
 
     transaction: "/dashboard/transaction",
+    transaction_detail: "/dashboard/transaction/:id",
+
 
     product_detail: "/dashboard/product/:id",
     addnew_product: "/dashboard/product/addnew",

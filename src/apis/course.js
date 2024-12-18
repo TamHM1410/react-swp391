@@ -34,7 +34,7 @@ export const del_course=async(payload)=>{
 
 ///user
 export const get_user_course = async () => {
-  const res = await axiosInstance.get("/users/courses");
+  const res = await axiosInstance.get("/users/courses/robe");
   return res.data;
 };
 

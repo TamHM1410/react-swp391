@@ -2,6 +2,8 @@ import { motion, useScroll, useSpring } from "framer-motion";
 import Connect from "./connect";
 import Hero from "./hero";
 import Footer from "../../components/Footer";
+import Services from "./service";
+import CTA from "./CTA";
 // HomeView component
 import HomeCarousel from "./carousel";
 const HomeView = () => {
@@ -16,7 +18,9 @@ const HomeView = () => {
     <>
       <motion.div className="progress-bar" style={{ scaleX }} />
       <Hero />
+      <Services/>
       <Connect/>
+      <CTA/>
       {/* Thêm các nội dung khác như LoremIpsum */}
       {/* <HomeCarousel/> */}
       <Footer/>

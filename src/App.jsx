@@ -30,6 +30,7 @@ import CategoryView from "./pages/Dashboard/Category/category-view";
 import CreateNewCategory from "./pages/Dashboard/Category/create-category";
 import CourseDetail from "./pages/Dashboard/Admin/course-management/[id]/course-detail-view";
 import UserDetail from "./pages/Dashboard/Admin/users/[id]/user-detail";
+import TransactionDetailView from "./pages/Dashboard/Admin/transaction-management/transaction-detail";
 /// shipper
 import ShippingView from "./pages/Dashboard/Shipping/shipping-vew";
 // @ config
@@ -50,22 +51,20 @@ function App() {
           <Route path={paths.auth.login} element={<LoginView />} />
           <Route path={paths.auth.register} element={<RegisterView />} />
           <Route path={paths.product.root} element={<ProductView />} />
-          <Route path={'/courses'} element={<CourseView />} />
-          <Route path={'/courses/:id'} element={<CourseDetailView />} />
+          <Route path={"/courses"} element={<CourseView />} />
+          <Route path={"/courses/:id"} element={<CourseDetailView />} />
 
-          <Route path={'/dashboard/order_history'} element={<OrderHistoryView/>} />
+          <Route
+            path={"/dashboard/order_history"}
+            element={<OrderHistoryView />}
+          />
 
-
-          <Route path={'/dashboard/shipping'} element={<ShippingView/>} />
-          <Route path={paths.dashboard.courses_detail} element={<CourseDetail />} />
-          <Route path={'/dashboard/user/:id'} element={<UserDetail />} />
-
-
-          
-
-
-
-
+          <Route path={"/dashboard/shipping"} element={<ShippingView />} />
+          <Route
+            path={paths.dashboard.courses_detail}
+            element={<CourseDetail />}
+          />
+          <Route path={"/dashboard/user/:id"} element={<UserDetail />} />
 
           {/* Routes yêu cầu đăng nhập */}
           <Route element={<PrivateRoute element={<Dashboard />} />}>
@@ -77,6 +76,10 @@ function App() {
             <Route
               path={paths.dashboard.transaction}
               element={<TransactionView />}
+            />
+            <Route
+              path={paths.dashboard.transaction_detail}
+              element={<TransactionDetailView />}
             />
 
             <Route
@@ -105,11 +108,11 @@ function App() {
           </Route>
 
           <Route path={paths.dashboard.category} element={<CategoryView />} />
-          <Route path={paths.dashboard.create_category} element={<CreateNewCategory />} />
-          <Route path={paths.dashboard.overview} element={<Overview/>} />
-
-
-
+          <Route
+            path={paths.dashboard.create_category}
+            element={<CreateNewCategory />}
+          />
+          <Route path={paths.dashboard.overview} element={<Overview />} />
 
           {/* Routes độc lập, không nên nằm trong /dashboard */}
           <Route path="" element={<PrivateRoute />}>

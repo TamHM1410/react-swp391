@@ -1,7 +1,7 @@
 const HomeCarousel = () => {
   return (
     <>
-      <div className="w-full  px-20 h- ">
+      <div className="w-full  px-30 h- ">
         <div className="carousel carousel-center rounded-box">
           <div className="carousel-item">
             <img

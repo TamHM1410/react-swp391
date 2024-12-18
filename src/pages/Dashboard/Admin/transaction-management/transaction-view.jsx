@@ -41,7 +41,13 @@ const filter = [
     value: "BANK",
   },
 ];
-const statusOption=["Thất bại ", "Đang xử lý ", "Đã nhận tiền (shipper đang giao)","Khách đã nhận hàng","Khách hàng chưa nhận được hàng"]
+const statusOption = [
+  "Thất bại ",
+  "Đang xử lý ",
+  "Đã nhận tiền (shipper đang giao)",
+  "Khách đã nhận hàng",
+  "Khách hàng chưa nhận được hàng",
+];
 const TransactionView = () => {
   const [valueFilter, setValueFilter] = useState("");
 
@@ -61,7 +67,14 @@ const TransactionView = () => {
           listFilter={filter}
         />
 
-        <Table title={tableTitle} data={data} onlyView={true} type="transaction"  statusOption={statusOption}/>
+        <Table
+          title={tableTitle}
+          data={data}
+          onlyView={true}
+          type="transaction"
+          statusOption={statusOption}
+          paths="/dashboard/transaction"
+        />
       </DashBoardLayout>
     </>
   );

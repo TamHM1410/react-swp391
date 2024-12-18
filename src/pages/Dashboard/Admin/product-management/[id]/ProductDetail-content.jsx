@@ -35,7 +35,7 @@ const ProductDetailContent = () => {
     queryFn: async () => {
       const res = await get_stem_by_id(id);
       const cate = await getCategories();
-      setCateList(cate.data);
+      setCateList(cate);
       imageListRef.current = res.stem_image;
       setListImg(res.stem_image);
       return res;

@@ -18,7 +18,7 @@ const title = [
   "Tổng ",
   "Số điện thoại ",
   "Trạng thái",
-  "Thông tin shipper"
+  "Thông tin shipper",
 ];
 const statusOption = [
   "Thất bại",
@@ -48,8 +48,8 @@ const OrderHistoryView = () => {
           onlyView={true}
           statusOption={statusOption}
           type="user"
-          subKeyTitle={["Tên","Số điện thoại"]}
-          
+          subKeyTitle={["Tên", "Số điện thoại"]}
+          paths="/dashboard/transaction"
         />
       </DashBoardLayout>
     </>
