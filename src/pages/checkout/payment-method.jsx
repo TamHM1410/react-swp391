@@ -40,11 +40,15 @@ const PaymentMethod = () => {
         <div className="py-5 shadow-2xl flex card">
           <div
             className=" flex gap-2 p-5"
-            onClick={() => setselectedPaymentMethod("BANK")}
+            onClick={() => setselectedPaymentMethod("ZALOPAY")}
           >
             <input type="radio" name="radio-1" className="radio" />
             <div className="flex gap-5">
-              Thanh toán qua ngân hàng <Landmark size={36} />
+              Thanh toán qua ZALO PAY 
+              <img
+                className="w-[80px] h-[40px] rounded	"
+                src="https://play-lh.googleusercontent.com/woYAzPCG1I8Z8HXCsdH3diL7oly0N8uth_1g6k7R_9Gu7lbxrsYeriEXLecRG2E9rP0=w600-h300-pc0xffffff-pd"
+              />
             </div>
           </div>
         </div>

@@ -3,7 +3,7 @@ import React from "react";
 export default function Services() {
   return (
     <section className="py-10 md:py-16 flex justify-center">
-      <div className="container">
+      <div className="container pt-16">
         <div className="text-center">
           <h2 className="text-3xl sm:text-5xl font-bold mb-4">
             Chúng tôi làm gì?

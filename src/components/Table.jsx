@@ -134,6 +134,22 @@ const Table = ({
                                 />
                               </td>
                             );
+                            if (key === "status" && value === 5)
+                              return (
+                                <td
+                                  key={key}
+                                  className="text-red-700 cursor-pointer"
+                                >
+                                  <Modal
+                                    title={statusOption[5]}
+                                    modalId={statusOption[5]}
+                                    type={other.type}
+                                    item={item}
+                                    text="red"
+                                  />
+                                </td>
+                              );
+  
 
                           // Xử lý nếu giá trị là object
                           if (typeof value === "object" && value !== null) {

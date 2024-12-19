@@ -8,6 +8,8 @@ const CheckoutSummary = ({ step }) => {
   const queryClient = useQueryClient();
   const { total, cart, current_infor, paymentMethod } = useCart();
 
+  console.log(paymentMethod,'payment method',current_infor)
+
   const handleClick = async () => {
     if (step === "0") {
       navigate("/checkout?step=1");
@@ -25,12 +27,13 @@ const CheckoutSummary = ({ step }) => {
         });
         payload["payment_method"] = paymentMethod;
         const res = await checkOut(payload);
-        if (res && paymentMethod === "VNPAY") {
+        console.log(res,'res')
+        if (res && (paymentMethod === "VNPAY" ||paymentMethod === "ZALOPAY" )) {
           window.location.href = res.data;
         }
         queryClient.invalidateQueries(["carts"]);
         toast.success(res.message);
-        navigate("/dashboard/order_history");
+        // navigate("/dashboard/order_history");
       } catch (error) {
         console.log(error);
       }

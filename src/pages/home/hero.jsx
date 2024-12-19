@@ -5,7 +5,7 @@ const Hero = () => {
   const text = "Khơi nguồn sáng tạo".split(" ");
 
   return (
-    <div className="flex flex-col px-10 w-full h-[50vh] justify-center pt-14">
+    <div className="flex flex-col px-10 w-full h-[50vh] justify-center pt-24">
       {/* <div className="flex justify-center text-white  p-5">
       {text.map((el, i) => (
           <motion.span

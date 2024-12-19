@@ -47,6 +47,8 @@ const statusOption = [
   "Đã nhận tiền (shipper đang giao)",
   "Khách đã nhận hàng",
   "Khách hàng chưa nhận được hàng",
+  "Đã nhận tiền (Chưa giao hàng)",
+
 ];
 const TransactionView = () => {
   const [valueFilter, setValueFilter] = useState("");

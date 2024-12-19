@@ -26,6 +26,8 @@ const statusOption = [
   "Đang giao hàng",
   "Đã nhận hàng",
   "Giao hàng thất bại",
+  "Chờ giao hàng",
+
 ];
 
 /// @api
